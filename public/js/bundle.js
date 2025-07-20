@@ -12569,7 +12569,7 @@ var showAlert = exports.showAlert = function showAlert(type, message) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logout = exports.login = void 0;
+exports.signup = exports.logout = exports.login = void 0;
 var _axios = _interopRequireDefault(require("axios"));
 var _alerts = require("./alerts");
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
@@ -12645,6 +12645,47 @@ var logout = exports.logout = /*#__PURE__*/function () {
   }));
   return function logout() {
     return _ref2.apply(this, arguments);
+  };
+}();
+var signup = exports.signup = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee3(name, email, password, passwordConfirm) {
+    var res, _t3;
+    return _regenerator().w(function (_context3) {
+      while (1) switch (_context3.p = _context3.n) {
+        case 0:
+          _context3.p = 0;
+          _context3.n = 1;
+          return (0, _axios.default)({
+            method: "POST",
+            url: "http://localhost:8000/api/v1/users/signup",
+            data: {
+              name: name,
+              email: email,
+              password: password,
+              passwordConfirm: passwordConfirm
+            }
+          });
+        case 1:
+          res = _context3.v;
+          if (res.data.status === "success") {
+            (0, _alerts.showAlert)("success", "Account created successfuly!");
+            window.setTimeout(function () {
+              location.assign("/");
+            }, 500);
+          }
+          _context3.n = 3;
+          break;
+        case 2:
+          _context3.p = 2;
+          _t3 = _context3.v;
+          (0, _alerts.showAlert)("error", _t3.response.data.message);
+        case 3:
+          return _context3.a(2);
+      }
+    }, _callee3, null, [[0, 2]]);
+  }));
+  return function signup(_x3, _x4, _x5, _x6) {
+    return _ref3.apply(this, arguments);
   };
 }();
 },{"axios":"../../node_modules/axios/index.js","./alerts":"alerts.js"}],"updateSettings.js":[function(require,module,exports) {
@@ -13080,10 +13121,21 @@ function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.
 function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; } /* eslint-disable */
 // DOM ELEMENTS
 var loginForm = document.querySelector(".form--login");
+var signupForm = document.querySelector(".form--signup");
 var logOutBtn = document.querySelector(".nav__el--logout");
 var userDataForm = document.querySelector(".form-user-data");
 var userPasswordForm = document.querySelector(".form-user-password");
 var bookBtn = document.getElementById("book-tour");
+if (signupForm) {
+  signupForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    var passwordConrifm = document.getElementById("passwordConfirm").value;
+    (0, _login.signup)(name, email, password, passwordConrifm);
+  });
+}
 if (loginForm) {
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -13169,7 +13221,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58747" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50792" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
