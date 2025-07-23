@@ -3,6 +3,9 @@
 A RESTful API for a tour booking platform built with Node.js, Express, and MongoDB.  
 This project was created as part of _Jonas Schmedtmann's Node.js Bootcamp_
 
+# 📄 Postman Documentation
+https://documenter.getpostman.com/view/41309258/2sB34foMse
+
 ---
 
 ## 🚀 Features
